@@ -29,7 +29,9 @@ export const TabSet = (props: ITabSetProps) => {
     const buttonBarRef = React.useRef<HTMLDivElement | null>(null);
     const overflowbuttonRef = React.useRef<HTMLButtonElement | null>(null);
     const stickyButtonsRef = React.useRef<HTMLDivElement | null>(null);
-
+    const tabsetWidthRef = React.useRef<number | null>(null);
+    const tabsetHeightRef = React.useRef<number | null>(null);
+    const [isCollapsed, setIsCollapsed] = React.useState<"horizontal" | "vertical" | null>(null);
     const icons = layout.getIcons();
 
     // must use useEffect (rather than useLayoutEffect) otherwise contentrect not set correctly (has height 0 when changing theme in demo)
@@ -49,6 +51,38 @@ export const TabSet = (props: ITabSetProps) => {
 
     // this must be after the useEffect, so the node rect is already set (else window popin will not position tabs correctly)
     const { selfRef, position, userControlledLeft, hiddenTabs, onMouseWheel, tabsTruncated } = useTabOverflow(node, Orientation.HORZ, buttonBarRef, stickyButtonsRef);
+
+    const isMaximized = node.isMaximized();
+
+    React.useEffect(() => {
+        if (!selfRef.current) return;
+        const observer = new ResizeObserver((entries) => {
+            const entry = entries[0];
+            if (entry) {
+                const tabsetWidth = entry.contentRect.width;
+                const tabsetHeight = entry.contentRect.height;
+                tabsetWidthRef.current = tabsetWidth;
+                tabsetHeightRef.current = tabsetHeight;
+
+                const tabStripHeight = tabStripRef.current?.clientHeight;
+
+                const orientation = tabsetWidth > tabsetHeight ? "horizontal" : "vertical";
+
+                if (tabStripHeight) {
+                    if (orientation === "horizontal" && tabStripHeight >= tabsetHeight) {
+                        setIsCollapsed("horizontal");
+                    } else if (orientation === "vertical" && tabStripHeight >= tabsetWidth) {
+                        setIsCollapsed(orientation);
+                    } else {
+                        setIsCollapsed(null);
+                    }
+                }
+            }
+        });
+
+        observer.observe(selfRef.current);
+        return () => observer.disconnect();
+    }, [isMaximized]);
 
     const onOverflowClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
         const callback = layout.getShowOverflowMenu();
@@ -335,6 +369,7 @@ export const TabSet = (props: ITabSetProps) => {
                     onDoubleClick={onDoubleClick}
                     onContextMenu={onContextMenu}
                     onClick={onAuxMouseClick}
+                    data-collapsed={isCollapsed}
                     onAuxClick={onAuxMouseClick}
                     draggable={true}
                     onDragStart={onDragStart}
@@ -356,6 +391,7 @@ export const TabSet = (props: ITabSetProps) => {
                     onDoubleClick={onDoubleClick}
                     onContextMenu={onContextMenu}
                     onClick={onAuxMouseClick}
+                    data-collapsed={isCollapsed}
                     onAuxClick={onAuxMouseClick}
                     draggable={true}
                     onWheel={onMouseWheel}
@@ -426,7 +462,7 @@ export const TabSet = (props: ITabSetProps) => {
     }
 
     const tabset = (
-        <div ref={selfRef} className={tabsetContainerClass} style={style}>
+        <div ref={selfRef} className={tabsetContainerClass} style={style} data-active={node.isActive()}>
             <div className={cm(CLASSES.FLEXLAYOUT__TABSET)} data-layout-path={path}>
                 {content}
             </div>
