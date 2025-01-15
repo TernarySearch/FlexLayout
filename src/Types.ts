@@ -73,6 +73,7 @@ export enum CLASSES {
     FLEXLAYOUT__TABSET_HEADER_CONTENT = "flexlayout__tabset_header_content",
     FLEXLAYOUT__TABSET_MAXIMIZED = "flexlayout__tabset-maximized",
     FLEXLAYOUT__TABSET_SELECTED = "flexlayout__tabset-selected",
+    FLEXLAYOUT__TABSET_ACTIVE = "flexlayout__tabset-active",
     FLEXLAYOUT__TABSET_SIZER = "flexlayout__tabset_sizer",
     FLEXLAYOUT__TABSET_TAB_DIVIDER = "flexlayout__tabset_tab_divider",
 
