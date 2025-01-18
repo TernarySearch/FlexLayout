@@ -1,6 +1,6 @@
 import React from "react";
-import { IJsonModel, Layout, Model, TabNode } from "../index";
-import "../../style/light.css";
+import { IJsonModel, Layout, Model, TabNode } from "../src/index";
+import "../dist/style/basic.css";
 
 const defaultLayout: IJsonModel = {
     global: {

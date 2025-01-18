@@ -1,0 +1,102 @@
+$color_base: inherit !default;
+$color_1: inherit !default;
+$color_2: inherit !default;
+$color_3: inherit !default;
+$color_4: inherit !default;
+$color_5: inherit !default;
+$color_6: inherit !default;
+$color_drag1: inherit !default;
+$color_drag2: inherit !default;
+$color_drag1_background: transparent !default;
+$color_drag2_background: transparent !default;
+
+.flexlayout {
+    &__layout {
+        --color-base: #{$color_base};
+        --color-1: #{$color_1};
+        --color-2: #{$color_2};
+        --color-3: #{$color_3};
+        --color-4: #{$color_4};
+        --color-5: #{$color_5};
+        --color-6: #{$color_6};
+        --color-drag1: #{$color_drag1};
+        --color-drag2: #{$color_drag2};
+        --color-drag1-background: #{$color_drag1_background};
+        --color-drag2-background: #{$color_drag2_background};
+
+        --underline_height: 2px;
+    }
+}
+
+@mixin tabset_mixin {}
+@mixin tabset_tabbar_mixin {}
+@mixin tabset_header_mixin {}
+@mixin tabset_selected_mixin {}
+@mixin tabset_maximized_mixin {}
+@mixin tab_top_mixin {}
+@mixin tab_bottom_mixin {}
+
+@mixin tab_button_mixin {
+    padding: 2px 0.5em calc(4px - var(--underline_height)) 0.5em;
+}
+
+@mixin tab_button_selected_mixin {
+    border-bottom: var(--underline_height) solid currentColor;
+}
+
+@mixin tab_button_unselected_mixin {
+    border-bottom: var(--underline_height) solid transparent;
+}
+
+@mixin tab_button_hovered_mixin {
+    border-bottom: var(--underline_height) solid currentColor;
+    opacity: 0.7;
+}
+
+@mixin close_button_hovered_mixin {}
+@mixin toolbar_button_hovered_mixin {}
+@mixin tab_button_stretch_mixin {}
+@mixin tab_button_stretch_hovered_mixin {}
+@mixin border_mixin {}
+
+@mixin border_button_mixin {
+    padding: 2px 0.5em calc(4px - var(--underline_height)) 0.5em;
+}
+
+@mixin border_button_selected_mixin {
+    border-bottom: var(--underline_height) solid currentColor;
+}
+
+@mixin border_button_unselected_mixin {
+    border-bottom: var(--underline_height) solid transparent;
+}
+
+@mixin border_button_hovered_mixin {
+    border-bottom: var(--underline_height) solid currentColor;
+    opacity: 0.7;
+}
+
+@mixin splitter_mixin {}
+@mixin splitter_hover_mixin {}
+@mixin splitter_drag_mixin {}
+@mixin splitter_border_mixin {}
+
+@mixin tabset_tab_divider_mixin {
+    width: 1px;
+    margin: 4px 6px;
+    border-left: 1px solid currentColor;
+    opacity: 0.2;
+}
+
+@mixin border_tab_divider_mixin {
+    width: 1px;
+    margin: 4px 6px;
+    border-left: 1px solid currentColor;
+    opacity: 0.2;
+}
+
+@import "_base";
+
+.flexlayout__tab_button_textbox {
+    border: none;
+} 
