@@ -25,12 +25,12 @@
     ],
     "scripts": {
         "start": "webpack serve",
-        "build": "npm run css && npm run doc && tsc",
+        "build": "npm run css && tsc && npm run build-storybook && npm run doc",
         "lint:eslint": "eslint src/*",
-        "doc": "typedoc --out dist/typedoc --excludeInternal --disableSources --excludePrivate --excludeProtected --readme none ./src",
+        "doc": "typedoc --out public/docs --excludeInternal --disableSources --excludePrivate --excludeProtected --readme none ./src",
         "css": "node scripts/compile-sass.js",
         "storybook": "storybook dev -p 6006",
-        "build-storybook": "storybook build"
+        "build-storybook": "storybook build -o public/storybook"
     },
     "author": "Ternary Search",
     "repository": "https://github.com/TernarySearch/FlexLayout",
@@ -88,5 +88,8 @@
         "webpack": "^5.94.0",
         "webpack-cli": "^5.1.4",
         "webpack-dev-server": "^5.0.4"
+    },
+    "dependencies": {
+        "typedoc-material-theme": "^1.2.0"
     }
 }
