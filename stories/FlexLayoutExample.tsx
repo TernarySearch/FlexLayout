@@ -1,6 +1,6 @@
 import React from "react";
 import { IJsonModel, Layout, Model, TabNode } from "../src/index";
-import "../dist/style/basic.css";
+import "../dist/style/rounded.css";
 
 const defaultLayout: IJsonModel = {
     global: {
@@ -10,28 +10,28 @@ const defaultLayout: IJsonModel = {
         tabSetEnableTabWrap: false,
         borderEnableDrop: false,
     },
-    borders: [
-        {
-            type: "border",
-            location: "right",
-            show: true,
-            selected: 0,
-            minSize: 300,
-            maxSize: 300,
-            children: [
-                {
-                    type: "tab",
-                    name: "Chat",
-                    component: "chat",
-                },
-                {
-                    type: "tab",
-                    name: "Settings",
-                    component: "settings",
-                },
-            ],
-        },
-    ],
+    // borders: [
+    //     {
+    //         type: "border",
+    //         location: "right",
+    //         show: true,
+    //         selected: 0,
+    //         minSize: 300,
+    //         maxSize: 300,
+    //         children: [
+    //             {
+    //                 type: "tab",
+    //                 name: "Chat",
+    //                 component: "chat",
+    //             },
+    //             {
+    //                 type: "tab",
+    //                 name: "Settings",
+    //                 component: "settings",
+    //             },
+    //         ],
+    //     },
+    // ],
     layout: {
         type: "row",
         weight: 100,
@@ -129,7 +129,13 @@ export function FlexLayout() {
                 border: "2px solid black",
             }}
         >
-            <Layout model={model} factory={factory} />
+            <Layout
+                model={model}
+                factory={factory}
+                onModelChange={(model) => {
+                    console.log({ model: model.toJson() });
+                }}
+            />
         </div>
     );
 }
