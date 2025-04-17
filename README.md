@@ -1,4 +1,4 @@
-# FlexLayout
+# TernaryLayout
 
 [![GitHub](https://img.shields.io/github/license/Caplin/FlexLayout)](https://github.com/caplin/FlexLayout/blob/master/LICENSE)
 ![npm](https://img.shields.io/npm/dw/flexlayout-react)
